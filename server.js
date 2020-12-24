@@ -23,15 +23,13 @@ app.post("/signup", function (req, res, next) {
     var newEmail = req.body.UserEmail;
     console.log(newEmail);
 
-    isfound = false;
+    var isfound = false;
 
     for (i = 0; i < users.length; i++) {
         if (users[i].UserEmail === newEmail) {
             isfound = true;
             break;
         }
-
-
     }
     if (isfound) {
         res.send("email already exists")
@@ -39,19 +37,31 @@ app.post("/signup", function (req, res, next) {
     else {
         users.push(req.body);
         res.send("signup successfully")
+        
     }
-        console.log(users)
+    console.log(users)
 });
 
-app.post("/login",function(req,res,next){
+app.post("/login", function (req, res, next) {
     vEmail = req.body.email
     vPassword = req.body.pass
     isfound = false;
-     for (i = 0; i < users.length ; i++){
-         if(users[i].UserEmail === vEmail){
-             isfound = true;
-         }
+    for (i = 0; i < users.length; i++) {
+        if (users[i].UserEmail === vEmail) {
+            isfound = i;
+           break;
+        }
+    }
+   if (isfound === false){
+       res.send("user not found");
      }
+     else if (users[isfound].UserPassword === vPassword){
+         res.send("login success " +"Name : "+ users[i].UserName+ "Email : "+users[i].UserEmail)
+     }
+     else{
+         res.send("user password invalid")
+     }
+
 })
 
 app.listen(3000, function () {

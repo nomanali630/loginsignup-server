@@ -9,13 +9,13 @@ function signup() {
     let national5 = document.getElementById("national").value;
 
 
-    user = ({
+    user = {
         UserName: name1,
         UserEmail: email2,
         UserPassword: password3,
         UserGender: gender4,
         UserNationality: national5,
-    })
+    }
     document.getElementById("name").value = "";
     document.getElementById("email").value = "";
     document.getElementById("password").value = "";
@@ -28,20 +28,10 @@ function signup() {
     Http.setRequestHeader("Content-Type", "application/json");
     Http.send(JSON.stringify(user));
 
-    Http.onreadystatechange = (e) => {
+    Http.onreadystatechange = () => {
         console.log(Http.responseText)
-        alert(Http.responseText);
+        document.getElementById("abc").innerHTML= Http.responseText ;
     }
-
-
-
-
-
-
-
-
-    // console.log(users);
-
     return false;
 }
 
@@ -54,14 +44,15 @@ function login() {
     var upassword = document.getElementById('upassword').value;
    
     const Http = new XMLHttpRequest();
-    const url = 'https://localhost:3000/login';
+    const url = 'http://localhost:3000/login';
     Http.open("POST", url);
     Http.setRequestHeader("Content-Type", "application/json");
     Http.send(JSON.stringify({ email: uemail, pass: upassword }));
     document.getElementById('uemail').value = "";
     document.getElementById('upassword').value = "";
-    Http.onreadystatechange = (e) => {
+    Http.onreadystatechange = () => {
         console.log(Http.responseText)
+        document.getElementById("abc2").innerHTML= Http.responseText ;
         
 
     }
@@ -72,14 +63,6 @@ function login() {
 
 
 
-// function showData() {
-    
-//     document.getElementById("new").innerHTML = "Name : " + newUser[cIndex].UserName
-//     document.getElementById("new1").innerHTML = "Email : " + newUser[cIndex].UserEmail
-//     document.getElementById("new2").innerHTML = "Password : " + newUser[cIndex].UserPassword
-//     document.getElementById("new3").innerHTML = "Gender : " + newUser[cIndex].UserGender
-//     document.getElementById("new4").innerHTML = "Nationality : " + newUser[cIndex].UserNationality
-// }
 
 
 
